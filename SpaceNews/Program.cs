@@ -10,17 +10,14 @@ namespace SpaceNews
 {
     class Program
     {
-        
-
         static void Main(string[] args)
         {
             Article article = new Article();
             var articles = article.GetArticles();
-            article.DisplayArticles(articles);
+            var groupedAricles = article.GroupedArticles(articles);
+            article.DisplayArticles(groupedAricles);
             Console.ReadLine();
         }
-
-        
     }
 
     public class Article
@@ -43,55 +40,69 @@ namespace SpaceNews
 
         public List<Article> GetArticles()
         {
-            var articles = new List<Article>();
-
             try
             {
+                var articles = new List<Article>();
                 string url = "https://api.spaceflightnewsapi.net/v3/articles?_limit=100";
                 _client = new HttpClient();
                 _client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("json/application"));
                 var json = _client.GetStringAsync(url).Result;
 
                 articles = JsonConvert.DeserializeObject<List<Article>>(json);
+
+                return articles;
             }
             catch (Exception ex)
             {
-                throw;
+                Console.WriteLine(ex);
+                return null;
             }
+        }
 
-            return articles;
+        public List<Article> GroupedArticles(List<Article> articles)
+        {
+            try
+            {
+                var sites = new List<string>();
+                var groupedArticles = new List<Article>();
 
+                foreach (var article in articles)
+                {
+                    if (!sites.Contains(article.NewsSite))
+                    {
+                        article.NumberOfArticles++;
+                        groupedArticles.Add(article);
+                        sites.Add(article.NewsSite);
+                    }
+                    else
+                    {
+                        var exisingSite = groupedArticles.Where(ac => ac.NewsSite == article.NewsSite).FirstOrDefault();
+                        exisingSite.NumberOfArticles++;
+                    }
+                }
+
+                return groupedArticles;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+                return null;
+            }
         }
 
         public void DisplayArticles(List<Article> articles)
         {
-            int count = 0;
-
-            var articleCount = new List<Article>();
-
-            foreach(var article in articles)
+            try
             {
-                if (!articleCount.Contains(article))
-                {
-                    article.NumberOfArticles = 1;
-                    articleCount.Add(article);
-                }
-                else
-                {
-
-                    articleCount.Remove(article);
-                    article.NumberOfArticles++;
-                    articleCount.Add(article);
-                     
-                }
+                foreach (var article in articles)
+                    Console.WriteLine($"{article.PublishedAt.ToString("MMMM")} {article.PublishedAt.Year} {article.NewsSite} { article.NumberOfArticles}");
             }
-
-            foreach(var article in articleCount)
+            catch (Exception ex)
             {
-                Console.WriteLine($"{article.PublishedAt.ToString("MMMM")} {article.PublishedAt.Year} {article.NewsSite} { article.NumberOfArticles}");
+                Console.WriteLine(ex);
             }
         }
     }
 
-    
+
 }
