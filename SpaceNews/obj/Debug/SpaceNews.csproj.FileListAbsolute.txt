@@ -1,0 +1,9 @@
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\bin\Debug\SpaceNews.exe.config
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\bin\Debug\SpaceNews.exe
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\bin\Debug\SpaceNews.pdb
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\obj\Debug\SpaceNews.csproj.CoreCompileInputs.cache
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\obj\Debug\SpaceNews.csproj.CopyComplete
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\obj\Debug\SpaceNews.exe
+C:\Users\Tshepo Sepadile\source\repos\SpaceNews\SpaceNews\obj\Debug\SpaceNews.pdb
